@@ -5,7 +5,15 @@ const getAllMonsters = (req, res) => {
     let resultado = monsters;
 
     // FILTROS AQUI
-
+ if (preco) {
+    if (preco === "gratis") {
+      resultado = resultado.filter((c) => c.preco === 0);
+    } else if (preco === "50-100") {
+      resultado = resultado.filter((c) => c.preco >= 50 && c.preco <= 100);
+    } else if (preco === "+100") {
+      resultado = resultado.filter((c) => c.preco > 100);
+    }
+ }
     
     res.status(200).json({
         total: resultado.length,
